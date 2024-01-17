@@ -14,6 +14,7 @@ function Square({ value, onSquareClick }) {
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [message, setMessage] = useState("");
 
   const winner = calculateWinner(squares);
   let status;
@@ -26,6 +27,7 @@ export default function Board() {
 
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) {
+      setMessage("Game over!");
       return null;
     }
     const nextSquares = squares.slice();
@@ -40,25 +42,44 @@ export default function Board() {
 
   return (
     <>
-      <div>
-        <h1 className="text-3xl text-blue-700 font-mono">{ status }</h1>
-      </div>
-      <div className="flex">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
+      <div className="flex items-center justify-center">
+        <div className="">
+          <div>
+            <h1 className="text-3xl text-red-700 font-mono">Tic Tac Toe!</h1>
+            <h1 className="text-2xl text-blue-700 font-mono text-center">
+              {message ? message : status}
+            </h1>
+          </div>
+          <div className="flex">
+            <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+            <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+            <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+          </div>
 
-      <div className="flex">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
+          <div className="flex">
+            <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+            <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+            <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+          </div>
 
-      <div className="flex">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+          <div className="flex">
+            <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+            <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+            <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+          </div>
+          <div>
+            <p>
+              Made with 💜 by{" "}
+              <a
+                href="https://facebook.com/solo.mizan"
+                target="blank"
+                className="font-semibold text-gray-600 underline"
+              >
+                Mizan Rahman
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );
